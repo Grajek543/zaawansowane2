@@ -17,6 +17,14 @@ void dopliku::zapisz(bst a) {
     }
     zapiszpre(drzewo.korzen);
     PRE.close(); // Close file after traversal is complete
+
+    IN.open("IN.txt", std::ios::out | std::ios::trunc); // Open file once here
+    if (!IN.is_open()) {
+        std::cout << "Nie ma dostêpu do pliku IN.txt" << std::endl;
+        return;
+    }
+    zapiszin(drzewo.korzen);
+    IN.close(); // Close file after traversal is complete
 }
 
 void dopliku::zapiszpre(wezel* b) { // Recursive function for pre-order traversal
@@ -24,5 +32,13 @@ void dopliku::zapiszpre(wezel* b) { // Recursive function for pre-order traversa
         PRE << " " << b->war;        // Write node value to file
         zapiszpre(b->lewy);          // Traverse left subtree
         zapiszpre(b->prawy);         // Traverse right subtree
+    }
+}
+
+void dopliku::zapiszin(wezel* a) {
+    if (a) {
+        zapiszin(a->lewy);
+        IN << " " << a->war;
+        zapiszin(a->prawy);
     }
 }

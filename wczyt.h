@@ -9,4 +9,5 @@ public:
 	dopliku(bst a);
 	void zapisz(bst a);
 	void zapiszpre(wezel* a);
+	void zapiszin(wezel* a);
 };
