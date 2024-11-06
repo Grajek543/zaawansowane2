@@ -15,4 +15,5 @@ public:
 	bst rdrzewo();
 	void wczytajpre(wezel* a);
 	void wczytajin(wezel* a);
+	void wczytajpost(wezel* a);
 };

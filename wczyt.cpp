@@ -81,6 +81,15 @@ void dopliku::wczytaj() {
         wczytajin(drzewo.korzen);
         IN.close(); // Close file after traversal is complete
     }
+    else if (x == 3) {
+        POST.open("POST.txt", std::ios::in); // Open file once here
+        if (!POST.is_open()) {
+            std::cout << "Nie ma dostępu do pliku POST.txt" << std::endl;
+            return;
+        }
+        wczytajpost(drzewo.korzen);
+        POST.close(); // Close file after traversal is complete
+    }
     else {
         std::cout << "Wprowadzony zly znak, wprowadz jeszcze raz";
         wczytaj();
@@ -150,5 +159,36 @@ void dopliku::wczytajin(wezel* a) {
     b->pop = c;
     if (!IN.eof()) {
         wczytajin(a);
+    }
+}
+
+void dopliku::wczytajpost(wezel* a) {
+    wezel* b = new wezel;
+    wezel* c = a;
+    b->lewy = NULL;
+    b->prawy = NULL;
+    int d;
+    POST >> d;
+    b->war = d;
+    if (!c) a = b;
+    else
+        while (true)
+            if (b->war < c->war) {
+                if (!c->lewy) {
+                    c->lewy = b;
+                    break;
+                }
+                else c = c->lewy;
+            }
+            else {
+                if (!c->prawy) {
+                    c->prawy = b;
+                    break;
+                }
+                else c = c->prawy;
+            }
+    b->pop = c;
+    if (!POST.eof()) {
+        wczytajpost(a);
     }
 }
