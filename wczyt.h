@@ -10,4 +10,5 @@ public:
 	void zapisz(bst a);
 	void zapiszpre(wezel* a);
 	void zapiszin(wezel* a);
+	void zapiszpost(wezel* a);
 };
