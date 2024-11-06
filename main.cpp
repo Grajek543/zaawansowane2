@@ -18,5 +18,6 @@ int main(int argc, char const *argv[]) {
     e.dodele(e.korzen, 453);
     e.wyspre(e.korzen);
     e.zapisz();
+    e.wczytaj();
     e.wyspre(e.korzen);
 }

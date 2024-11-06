@@ -11,4 +11,7 @@ public:
 	void zapiszpre(wezel* a);
 	void zapiszin(wezel* a);
 	void zapiszpost(wezel* a);
+	void wczytaj();
+	bst rdrzewo();
+	void wczytajpre(wezel* a);
 };

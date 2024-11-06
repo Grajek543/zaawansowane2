@@ -125,3 +125,9 @@ void bst::zapisz() {
     dopliku a(*this);
     a.zapisz(*this);
 }
+
+void bst::wczytaj() {
+    dopliku a(*this);
+    a.wczytaj();
+    *this = a.rdrzewo();
+}

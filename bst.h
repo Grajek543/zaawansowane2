@@ -23,4 +23,5 @@ public:
     void wysin(wezel*& korzen);
     void wyspost(wezel*& korzen);
     void zapisz();
+    void wczytaj();
 };
