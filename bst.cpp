@@ -95,3 +95,27 @@ void bst::usubst(wezel *a) {
         delete a;
     }
 }
+
+void bst::wyspre(wezel *&korzen) {
+    if(korzen) {
+        std::cout << korzen->war<<" ";
+        wyspre(korzen->lewy);
+        wyspre(korzen->prawy);
+    }
+}
+
+void bst::wysin(wezel *&korzen) {
+    if(korzen) {
+        wysin(korzen->lewy);
+        std::cout << korzen->war<<" ";
+        wysin(korzen->prawy);
+    }
+}
+
+void bst::wyspost(wezel *&korzen) {
+    if(korzen) {
+        wyspost(korzen->lewy);
+        wyspost(korzen->prawy);
+        std::cout << korzen->war<<" ";
+    }
+}

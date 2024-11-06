@@ -3,5 +3,7 @@
 #include <iostream>
 
 int main(int argc, char const *argv[]) {
-    std::cout << "Hello World";
+    bst e;
+    e.dodele(e.korzen, 3);
+    e.wysin(e.korzen);
 }
