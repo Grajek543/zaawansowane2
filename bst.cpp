@@ -1,4 +1,5 @@
 #include "bst.h"
+#include "Wczyt.h"
 #include <iostream>
 
 bst::bst(void) {
@@ -66,7 +67,7 @@ void bst::dodele(wezel *&korzen, int a) {
 
 wezel *bst::usunele(wezel *&korzen, wezel *a) {
     wezel *b = a->pop;
-    wezel *c;
+    wezel *c  = NULL;
     if((a->lewy) && (a->prawy)) {
         if(rand() % 2) c = usunele(korzen, min(a));
         else usunele(korzen, max(a));
@@ -118,4 +119,9 @@ void bst::wyspost(wezel *&korzen) {
         wyspost(korzen->prawy);
         std::cout << korzen->war<<" ";
     }
+}
+
+void bst::zapisz() {
+    dopliku a(*this);
+    a.zapisz(*this);
 }
