@@ -14,4 +14,5 @@ public:
 	void wczytaj();
 	bst rdrzewo();
 	void wczytajpre(wezel* a);
+	void wczytajin(wezel* a);
 };

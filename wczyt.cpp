@@ -72,6 +72,15 @@ void dopliku::wczytaj() {
         wczytajpre(drzewo.korzen);
         PRE.close(); // Close file after traversal is complete
     }
+    else if (x == 2) {
+        IN.open("IN.txt", std::ios::in); // Open file once here
+        if (!IN.is_open()) {
+            std::cout << "Nie ma dostępu do pliku IN.txt" << std::endl;
+            return;
+        }
+        wczytajin(drzewo.korzen);
+        IN.close(); // Close file after traversal is complete
+    }
     else {
         std::cout << "Wprowadzony zly znak, wprowadz jeszcze raz";
         wczytaj();
@@ -110,5 +119,36 @@ void dopliku::wczytajpre(wezel* a) {
     b->pop = c;
     if (!PRE.eof()) {
         wczytajpre(a);
+    }
+}
+
+void dopliku::wczytajin(wezel* a) {
+    wezel* b = new wezel;
+    wezel* c = a;
+    b->lewy = NULL;
+    b->prawy = NULL;
+    int d;
+    IN >> d;
+    b->war = d;
+    if (!c) a = b;
+    else
+        while (true)
+            if (b->war < c->war) {
+                if (!c->lewy) {
+                    c->lewy = b;
+                    break;
+                }
+                else c = c->lewy;
+            }
+            else {
+                if (!c->prawy) {
+                    c->prawy = b;
+                    break;
+                }
+                else c = c->prawy;
+            }
+    b->pop = c;
+    if (!IN.eof()) {
+        wczytajin(a);
     }
 }
