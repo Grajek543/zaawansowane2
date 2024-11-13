@@ -1,26 +1,32 @@
+/// @file bst.h Deklaracja metod drzewa BST
+
+/// @brief Deklaracja pojedynczego elementu drzewa
 struct wezel {
-    wezel *pop;
-    wezel *lewy;
-    wezel *prawy;
-    int war;
+    wezel *pop; ///< Poprzednik elementu
+    wezel *lewy; ///< Lewy dziedzic elementu
+    wezel *prawy; ///< Prawy dziedzic elementu
+    int war; ///< Wartość elementu
 };
 
+///@brief Deklaracja drzewa, jego zmiennych i jego metod
 class bst {
 public:
-    int roz;
-    wezel* korzen;
+    wezel *korzen; ///< Pierwszy element drzewa
+    int r; ///< Liczba elementów drzewa
     bst();
-    ~bst() {}
-    wezel* najmin(wezel* a);
-    wezel* najmax(wezel* a);
-    wezel* min(wezel* a);
-    wezel* max(wezel* a);
-    void dodele(wezel*& korzen, int a);
-    wezel* usunele(wezel*& korzen, wezel* a);
-    void usubst(wezel* a);
-    wezel* szuk(wezel*& korzen, int a) {}
-    void wyspre(wezel*& korzen);
-    void wysin(wezel*& korzen);
-    void wyspost(wezel*& korzen);
+    ~bst();
+    wezel *najmin(wezel *a);
+    wezel *najmax(wezel *a);
+    wezel *min(wezel *a);
+    wezel *max(wezel *a);
+    wezel *zwroc(int a);
+    void dodele(int a);
+    wezel *usunele(int d);
+    void usubst(wezel *korzen);
+    void szuk(int a);
+    void wyspre(wezel *korzen);
+    void wysin(wezel *korzen);
+    void wyspost(wezel *korzen);
+    void wczytaj();
     void zapisz();
 };
