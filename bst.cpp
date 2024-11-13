@@ -3,8 +3,11 @@
 #include <iostream>
 
 bst::bst(void) {
-    roz = 0;
     korzen = NULL;
+}
+
+bst::~bst(void) {
+    delete korzen;
 }
 
 wezel *bst::najmin(wezel *a) {
@@ -25,7 +28,7 @@ wezel *bst::min(wezel *a) {
     do {
         b = a;
         a = a->pop;
-    } while(a && (a->prawy != b));
+    } while((a) && (a->prawy != b));
     return a;
 }
 
@@ -35,19 +38,28 @@ wezel *bst::max(wezel *a) {
     do {
         b = a;
         a = a->pop;
-    } while(a && (a->lewy != b));
+    } while((a) && (a->lewy != b));
     return a;
 }
 
-void bst::dodele(wezel *&korzen, int a) {
+wezel *bst::zwroc(int a) {
+    wezel *b = korzen;
+    while((b) && (b->war != a)) {
+        if(a < b->war) b = b->lewy;
+        else b = b->prawy;
+    }
+    return b;
+}
+
+void bst::dodele(int a) {
     wezel *b = new wezel;
     wezel *c = korzen;
     b->lewy = NULL;
     b->prawy = NULL;
     b->war = a;
     if(!c) korzen = b;
-    else
-        while(true)
+    else {
+        while(true) {
             if(b->war < c->war) {
                 if(!c->lewy) {
                     c->lewy = b;
@@ -62,15 +74,18 @@ void bst::dodele(wezel *&korzen, int a) {
                 }
                 else c = c->prawy;
             }
+        }
+    }
     b->pop = c;
 }
 
-wezel *bst::usunele(wezel *&korzen, wezel *a) {
+wezel *bst::usunele(int d) {
+    wezel *a = zwroc(d);
     wezel *b = a->pop;
-    wezel *c  = NULL;
+    wezel *c = NULL;
     if((a->lewy) && (a->prawy)) {
-        if(rand() % 2) c = usunele(korzen, min(a));
-        else usunele(korzen, max(a));
+        if(rand() % 2) c = usunele(min(a)->war);
+        else c = usunele(max(a)->war);
         c->lewy = a->lewy;
         if(c->lewy) c->lewy->pop = c;
         c->prawy = a->prawy;
@@ -93,41 +108,51 @@ void bst::usubst(wezel *a) {
     if(a) {
         usubst(a->lewy);
         usubst(a->prawy);
-        delete a;
+        usunele(a->war);
     }
 }
 
-void bst::wyspre(wezel *&korzen) {
-    if(korzen) {
-        std::cout << korzen->war<<" ";
-        wyspre(korzen->lewy);
-        wyspre(korzen->prawy);
+void bst::szuk(int a) {
+    wezel *b = korzen;
+    while((b) && (b->war != a)) {
+        std::cout << b->war << " ";
+        if(a < b->war) b = b->lewy;
+        else b = b->prawy;
+    }
+    std::cout << std::endl;
+}
+
+void bst::wyspre(wezel *a) {
+    if (a) {
+        std::cout << a->war << " ";
+        wyspre(a->lewy);
+        wyspre(a->prawy);
     }
 }
 
-void bst::wysin(wezel *&korzen) {
-    if(korzen) {
-        wysin(korzen->lewy);
-        std::cout << korzen->war<<" ";
-        wysin(korzen->prawy);
+void bst::wysin(wezel *a) {
+    if(a) {
+        wysin(a->lewy);
+        std::cout << a->war << " ";
+        wysin(a->prawy);
     }
 }
 
-void bst::wyspost(wezel *&korzen) {
-    if(korzen) {
-        wyspost(korzen->lewy);
-        wyspost(korzen->prawy);
-        std::cout << korzen->war<<" ";
+void bst::wyspost(wezel *a) {
+    if(a) {
+        wyspost(a->lewy);
+        wyspost(a->prawy);
+        std::cout << a->war << " ";
     }
 }
 
 void bst::zapisz() {
-    dopliku a(*this);
-    a.zapisz(*this);
+    dopliku a(this->korzen);
+    a.zapisz();
 }
 
 void bst::wczytaj() {
-    dopliku a(*this);
+    dopliku a(this->korzen);
     a.wczytaj();
-    *this = a.rdrzewo();
+    this->korzen = a.drzewo;
 }

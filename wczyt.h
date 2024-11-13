@@ -1,19 +1,21 @@
 #include <fstream>
+
 class dopliku {
-private:
-	bst drzewo;
+public:
+	wezel *drzewo;
 	std::fstream PRE;
 	std::fstream IN;
 	std::fstream POST;
-public:
-	dopliku(bst a);
-	void zapisz(bst a);
+	dopliku(wezel *a);
+	void wczytajpre(wezel* a);
+	void wczytajin(wezel* a);
+	void wczytajpost(wezel* a);
+	void zapisz();
 	void zapiszpre(wezel* a);
 	void zapiszin(wezel* a);
 	void zapiszpost(wezel* a);
 	void wczytaj();
-	bst rdrzewo();
-	void wczytajpre(wezel* a);
-	void wczytajin(wezel* a);
-	void wczytajpost(wezel* a);
+	wezel *rdrzewo();
+	int bintoint(int a);
+	int inttobin(int a);
 };
